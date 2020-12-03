@@ -1,0 +1,14 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>br.com.fabricadeprogramador</groupId>
+  <artifactId>curso_java_web</artifactId>
+  <version>0.0.1-SNAPSHOT</version>
+  <packaging>war</packaging> <!-- identifica que é um projeto web.
+  							  na primeira vez precisa gerar o Web.xml,
+  							  mudando para perspectiva Web  e
+  							  clicando com o botão da direita do mouse
+  							  no Deployment Descriptor, selecionando a opção
+  							   (generate deployment Descriptor Stub -->
+  <name>curso_java_web</name>
+  <description>Porjeto com front-end html/css/javascritp e brack-end java</description>
+</project>  <!--  essas tags são interpretadas pelo Maven -->
