@@ -1,26 +1,25 @@
 
 //Criando uma Classe (Objeto)
 
-Autenticacao = function(){}
+Autenticacao = function(){
 
-//Criando um Método que pertence a Classe Autenticacao
-Autenticacao.prototype.validarCampos = function (){
+    //Criando um Método dentro da Classe Autenticacao
+    this.validarCampos = function (){
     
-    elementoUsuario = document.getElementById("txtUsuario");
-    usuario = elementoUsuario.value;
+        elementoUsuario = document.getElementById("txtUsuario");
+        usuario = elementoUsuario.value;
     
-
-    elementoSenha = document.getElementById("txtSenha");
-    senha = elementoSenha.value;
+        elementoSenha = document.getElementById("txtSenha");
+        senha = elementoSenha.value;
     
-    if (usuario != "" && senha != "") {
-        return true;
-    } else {
-        window.alert("Usuario e Senha devem ser preenchidos !");
-        return false;
+        if (usuario != "" && senha != "") {
+            return true;
+        } else {
+            window.alert("Usuario e Senha devem ser preenchidos !");
+            return false;
+        }
     }
 }
-
 // Instanciando o Objeto (Classe) Autenticacao
 
 aut = new Autenticacao();
