@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Par ou Impar</title>
+
+    <script>
+        // Objeto
+        VerificaNumeros = function(){
+
+        }
+        // Método
+        VerificaNumeros.prototype.parimpar = function() {
+            
+            
+            num = document.getElementById("numDigitado").value;
+            resto = num % 2;
+            if (resto == 0 ) {
+                window.alert("O número " + num + " é par !")
+            } else {
+                window.alert("O número " + num + " é impar !")
+            }
+
+        }
+
+        // Instancia
+        verifica = new VerificaNumeros();
+
+
+    </script>
+
+</head>
+<body>
+
+    <form >
+        <input type="number" id="numDigitado" placeholder="digito um número">
+
+        <input type="button" id="btnVerifica" value="verifica" onclick="verifica.parimpar()">
+
+
+    </form>
+    
+</body>
+</html>

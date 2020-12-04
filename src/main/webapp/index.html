@@ -1,37 +1,26 @@
 <!DOCTYPE html>
 <html>
 	<head> 
-	<meta charset="ISO-8859-1">
+	<meta charset="UTF-8">
 	<title>Curso Java Web</title>
 	
 	<link rel="stylesheet" type="text/css" href="css/style.css">
 	
-	
-	<style type="text/css">
-	/*-- Os comandos abaixo foram colocados em arquivo externo style.css, indicado acima
-		input {
-			border: thin;
-			border-style: solid;
-			border-color: blue;
-		}
-	*/
-	</style> 
-	
-	<script type="text/javascript">
-	
-	
-	</script>
+	<script src="js/autenticacao.js"></script>
+
 	
 	</head>
 	<body>
 		
-		<form action="" method="post"> <!-- GET(pedir),POST(enviar),DELETE(excluir),PUT(atualizar) -->
+		<form method="get" onsubmit="return aut.validarCampos()" > <!-- GET(pedir),POST(enviar),DELETE(excluir),PUT(atualizar)
+											onsubmit = true os dados serão enviados via action=""
+											onsubmit = false os dados não serão enviados -->
 		
-			<label> Usu�rio: </label>
-			<input id="txtUsuario" name="txtUsuario" type="text" placeholder="nome do usu�rio">
+			<label> Usuário: </label>
+			<input id="txtUsuario" name="txtUsuario" type="text" placeholder="nome do usuário">
 			<br><br>
 			<label> Senha: </label>
-			<input id="txtSenha" name="txtSenha" type="password" placeholder="senha do usu�rio">
+			<input id="txtSenha" name="txtSenha" type="password" placeholder="senha do usuário">
 			<br><br>
 			<input type="submit" value="Autenticar" style="border-color:black;">
 		
