@@ -15,7 +15,7 @@ Autenticacao = function(){
         if (usuario != "" && senha != "") {
             return true;
         } else {
-            window.alert("Usuario e Senha devem ser preenchidos !");
+            document.getElementById("txtMensagem").innerHTML = "<strong>Usuário e Senha devem ser preenchidos !</strong>";
             return false;
         }
     }

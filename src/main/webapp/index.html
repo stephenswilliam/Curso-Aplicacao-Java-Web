@@ -10,20 +10,19 @@
 	
 	</head>
 	<body>
+	<section >
+		<h2>Cadastro de Usuários</h2>
+		<form method="get" onsubmit="return aut.validarCampos()" > 
+			<!-- GET(pedir),POST(enviar),DELETE(excluir),PUT(atualizar)
+			onsubmit = true os dados serão enviados via action=""
+			onsubmit = false os dados não serão enviados -->
 		
-		<form method="get" onsubmit="return aut.validarCampos()" > <!-- GET(pedir),POST(enviar),DELETE(excluir),PUT(atualizar)
-											onsubmit = true os dados serão enviados via action=""
-											onsubmit = false os dados não serão enviados -->
-		
-			<label> Usuário: </label>
 			<input id="txtUsuario" name="txtUsuario" type="text" placeholder="nome do usuário">
-			<br><br>
-			<label> Senha: </label>
 			<input id="txtSenha" name="txtSenha" type="password" placeholder="senha do usuário">
-			<br><br>
 			<input type="submit" value="Autenticar" style="border-color:black;">
 		
 		</form>
-		
+		<p id="txtMensagem" style="text-align: center;"><strong> Informe seu nome e senha !</strong></p>
+	</section>
 	</body>
 </html>
