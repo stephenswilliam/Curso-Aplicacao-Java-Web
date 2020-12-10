@@ -14,31 +14,22 @@ public class UsuarioRepositoryLista implements UsuarioRepository {
 		usuarios.add(usuario);
 	}
 	@Override
-	public void excluir(int indice) {
-		usuarios.remove(indice);
+	public void excluir(int id) {
+		usuarios.remove(id);
 	}
 	@Override
-	public void alterar(int indice, Usuario usuario) {
-		usuarios.set(indice, usuario);
+	public void alterar(Usuario usuario) {
+		usuarios.set(usuario.getId(), usuario);
 	}
 	@Override
-	public String obterTodosUsuarios() {
-		/*
-		 * Montando o Json com todos os usuarios
-		 */
-		String usuariosJson = "[";
-		for (int i = 0; i < usuarios.size(); i++) {
-			if (i != 0) {
-				usuariosJson += ",";
-			}
-			Usuario usu = usuarios.get(i);
-			usuariosJson += "{\"nome\":\"" +usu.getNome()+ "\",\"senha\":\"" +usu.getSenha()+ "\"}";
-		}
-		usuariosJson += "]";
-		/*
-		 * 
-		 */
-		return usuariosJson;
+	public List<Usuario> obterTodosUsuarios() {
+		
+		return usuarios;
+		
+	}
+	@Override
+	public Usuario obterPorId(int id) {
+		return null;
 	}
 				
 		

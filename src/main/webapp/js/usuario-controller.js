@@ -5,7 +5,7 @@ UsuarioController = function(){
     // Métodos DOM
 
     this.modoEditar = false;
-    this.indiceEditar = 0;
+    this.idEditar = 0;
 
     this.iniciaTela = function(){
         this.modoEditar = false;
@@ -16,22 +16,26 @@ UsuarioController = function(){
 
     }
     this.listarUsuarios = function(){
-        let todosUsuarios = this.usuarioService.obtemUsuarios();
-        this.montarTabelaUsuarios(todosUsuarios);
+        var self = this; // para ser referenciado dentro de outra function
+        todosUsuarios = this.usuarioService.obtemUsuarios(function (todosUsuarios) {
+                                    self.montarTabelaUsuarios(todosUsuarios);
+                                    });
     }
+
     this.montarTabelaUsuarios = function(todosUsuarios){
         if (todosUsuarios.length == 0) {
             document.getElementById("txtMensagem").innerHTML = "<strong>Adicione Usuários</strong>";
             document.getElementById("tabelaUsuarios").innerHTML = "";
         } else {
             document.getElementById("txtMensagem").innerHTML = "";
-            let texto = "<tr><th>Nome</th><th>Senha</th><th></th><th></th></tr>"; // th deixa em negrito
+            let texto = "<tr><th>Id</th><th>Nome</th><th>Senha</th><th></th><th></th></tr>"; // th deixa em negrito
             for (let i = 0; i < todosUsuarios.length; i++) {
                 texto += "<tr>";
+                texto += "<td>" + todosUsuarios[i].id + "</td>";
                 texto += "<td>" + todosUsuarios[i].nome + "</td>";
                 texto += "<td>" + todosUsuarios[i].senha + "</td>";
-                texto += '<td><input type="button" value="Excluir" onclick="controlador.aoCliecarExcluir(' +i+ ')"></td>';
-                texto += '<td><input type="button" value="Editar" onclick="controlador.aoClicarEditar(' +i+ ')"></td>';
+                texto += '<td><input type="button" value="Excluir" onclick="controlador.aoCliecarExcluir(' +todosUsuarios[i].id+ ')"></td>';
+                texto += '<td><input type="button" value="Editar" onclick="controlador.aoClicarEditar(' +todosUsuarios[i].id+ ')"></td>';
                 texto += "</tr>";
             }
             document.getElementById("tabelaUsuarios").innerHTML = texto;
@@ -56,26 +60,38 @@ UsuarioController = function(){
         let objetoUsuarioSenha = this.obtemUsuarioSenha();
         let usuarioSenhaValidos = this.testaUsuarioSenha(objetoUsuarioSenha);
         if (usuarioSenhaValidos){
+            var self = this; // para ser referenciado dentro de outra function
             if (!this.modoEditar) {
-                this.usuarioService.salvaUsuario(objetoUsuarioSenha);
+                this.usuarioService.salvaUsuario(objetoUsuarioSenha,function (){
+                                    self.iniciaTela();
+                                    window.alert("Inclusão efetuada com sucesso!");})
             } else {
-                this.usuarioService.atualizaUsuario(this.indiceEditar,objetoUsuarioSenha);
-                this.modoEditar = false;        
+                this.usuarioService.atualizaUsuario(this.idEditar,objetoUsuarioSenha,function (){
+                                    self.iniciaTela();
+                					window.alert("Alteração efetuada com sucesso!");})
+                this.modoEditar = false;
             }
-            this.iniciaTela();
         }
     }
     
-    this.aoCliecarExcluir = function(indice){
-        this.usuarioService.excluiUsuario(indice);
-        this.iniciaTela();
+    this.aoCliecarExcluir = function(id){
+    
+    	if (window.confirm("Deseja realmente excluir?")){
+	    	var self = this;
+	        this.usuarioService.excluiUsuario(id,function (){
+	            self.iniciaTela();
+	            window.alert("Exclusão efetuada com sucesso!");})
+		}
     }
-    this.aoClicarEditar = function(indice){
-        let objetoUsuarioSenha = this.usuarioService.obtemUsuarioPorId(indice);
-        document.getElementById("txtUsuario").value = objetoUsuarioSenha.nome;
-        document.getElementById("txtSenha").value = objetoUsuarioSenha.senha;
+    this.aoClicarEditar = function(id){
+        this.usuarioService.obtemUsuarioPorId(id, function (usuario){
+            document.getElementById("txtUsuario").value = usuario.nome;
+            document.getElementById("txtSenha").value = usuario.senha;
+
+        });
+        
         this.modoEditar = true;
-        this.indiceEditar = indice;
+        this.idEditar = id;
     }
     this.aoClicarCancelar = function(){
         this.iniciaTela();

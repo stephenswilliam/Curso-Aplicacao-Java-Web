@@ -1,6 +1,6 @@
-<!DOCTYPE html>
-<html>
-<head>
+ <!DOCTYPE html>
+<html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,7 +9,7 @@
     <script src="js/usuario-service.js"></script>
     <script src="js/usuario-controller.js"></script>
     <script>
-        controlador = new UsuarioController;
+        controlador = new UsuarioController();
     </script>
 </head>
 
@@ -18,7 +18,7 @@
         <h2>Cadastro de Usuários</h2>
         <form>
             <input type="text" id="txtUsuario" name="txtUsuario" placeholder="Nome do Usuário">
-            <input type="text" id="txtSenha" name="txtSenha" placeholder="Senha">
+            <input type="password" id="txtSenha" name="txtSenha" placeholder="Senha">
             <input type="button" value="Salvar" onclick="controlador.aoClicarSalvar()">
             <input type="button" value="Cancelar" onclick="controlador.aoClicarCancelar()">
         </form>
@@ -28,7 +28,8 @@
         </table>
     </section>
 </body>
-	<script>
-    	controlador.listarUsuarios(); //Será executado no início, após a montagem do body
-	</script>
+<script>
+    controlador.listarUsuarios(); //Será executado no início, após a montagem do body
+</script>
+
 </html>

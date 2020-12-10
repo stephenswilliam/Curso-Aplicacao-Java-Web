@@ -1,5 +1,7 @@
 package repository;
 
+import java.util.List;
+
 import model.Usuario;
 
 public interface UsuarioRepository {
@@ -10,7 +12,9 @@ public interface UsuarioRepository {
 		
 		public void alterar(Usuario usuario);
 		
-		public String obterTodosUsuarios();
+		public List<Usuario> obterTodosUsuarios();
+
+		public Usuario obterPorId(int id);
 		
 	}
 

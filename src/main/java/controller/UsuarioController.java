@@ -1,6 +1,8 @@
 package controller;
 
 import java.io.IOException;
+import java.util.List;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -34,18 +36,39 @@ public class UsuarioController extends HttpServlet {
 		Usuario usuario = new Usuario();
 		usuario.setNome(nome);
 		usuario.setSenha(senha);
+		// Grava Usuario
 		usuarioRepository.cadastrar(usuario);
-		// Responde via HTTPServletResponse
-		resp.getWriter().println("Gravei: " +nome+ " " +senha);
 	}
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		/* Colocando no formato JSON
-		 * [ {'nome':"jao","senha":"123"},{"nome":"josé","senha":"456"} ]
-		 * Para testar o json ir no site "json formatter & validator"
-		*/
-		resp.getWriter().println(usuarioRepository.obterTodosUsuarios());
+		//obtem por ID
+		if (req.getParameter("id") != null) {
+			int id = Integer.parseInt(req.getParameter("id"));
+			Usuario usu = usuarioRepository.obterPorId(id);
+			String usuJson = "{\"id\":\"" +usu.getId()+ "\",\"nome\":\"" +usu.getNome()+ "\",\"senha\":\"" +usu.getSenha()+ "\"}";
+			// Devolve o Json para o Client
+			resp.getWriter().println(usuJson);
+		} else {
+			//obtem todos os usuarios
+			List<Usuario> lista = usuarioRepository.obterTodosUsuarios();
+			
+			/* Colocando no formato JSON
+			 * [ {'nome':"jao","senha":"123"},{"nome":"josé","senha":"456"} ]
+			 * Para testar o json ir no site "json formatter & validator"
+			*/
+			String usuariosJson = "[";
+			for (int i = 0; i < lista.size(); i++) {
+				if (i != 0) {
+					usuariosJson += ",";
+				}
+				Usuario usu = lista.get(i);
+				usuariosJson += "{\"id\":\"" +usu.getId()+ "\",\"nome\":\"" +usu.getNome()+ "\",\"senha\":\"" +usu.getSenha()+ "\"}";
+			}
+			usuariosJson += "]";
+			// Devolve o Json para o Client
+			resp.getWriter().println(usuariosJson);
+		}
 	}
 	@Override
 	protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -58,14 +81,16 @@ public class UsuarioController extends HttpServlet {
 		usuario.setId(id);
 		usuario.setNome(nome);
 		usuario.setSenha(senha);
+		// Altera Usuario
 		usuarioRepository.alterar(usuario);
 		
 	}
 	@Override
 	protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		// Obtem indice 
-		int indice = Integer.parseInt(req.getParameter("indice"));
-		usuarioRepository.excluir(indice);
+		// Obtem id 
+		int id = Integer.parseInt(req.getParameter("id"));
+		// Exlui usuario pelo id
+		usuarioRepository.excluir(id);
 	}
 	@Override
 	public void init() throws ServletException {
