@@ -4,7 +4,7 @@
 Autenticacao = function(){
 
     //Criando um Método dentro da Classe Autenticacao
-    this.validarCampos = function (){
+	this.validarCampos = function (){
     
         elementoUsuario = document.getElementById("txtUsuario");
         usuario = elementoUsuario.value;
