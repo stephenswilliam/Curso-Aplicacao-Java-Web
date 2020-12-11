@@ -13,7 +13,7 @@ Autenticacao = function(){
         senha = elementoSenha.value;
     
         if (usuario != "" && senha != "") {
-        	window.open("http://localhost:8080/curso_java_web/cadastro-usuario.html");
+        	window.open("cadastro-usuario.html");
         	return true;
         } else {
             document.getElementById("txtMensagem").innerHTML = "<strong>Usuário e Senha devem ser preenchidos !</strong>";
