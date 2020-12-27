@@ -1,0 +1,11 @@
+Aplicação desenvolvida durante o Curso on-line no YouTbe:
+    Curso: Java Script (Front End) + Java (Back End) 
+    Canal: Fábrica de Programador
+
+O front-end foi desenvolvido utilizando o HTML,CSS e Java Script, AJAX e JSON.
+
+O back-end foi desenvolvido em Java com JDBC acessando PostgreSQL, HTTP Servlet e JSON.
+
+Para executar a aplicação, inicializar antes servidor Tomcat.
+
+Para executar o front-end pelo Navegador, digitar: localhost:8080/curso_java_web
